@@ -33,7 +33,7 @@ ModulinoMovement movement;
 
 // ------------------------- Kalibrierung ------------------------------------
 const bool SWAP_AXES = false;  // true, wenn links/rechts und vor/zurueck vertauscht sind
-const int  INVERT_X  = 1;      // -1, wenn die Kugel spiegelverkehrt nach links/rechts rollt
+const int  INVERT_X  = -1;     // auf unserem Board so korrekt; 1, falls links/rechts vertauscht
 const int  INVERT_Y  = 1;      // -1, wenn vor/zurueck vertauscht ist
 
 // ------------------------- Spiel-Tuning ------------------------------------
