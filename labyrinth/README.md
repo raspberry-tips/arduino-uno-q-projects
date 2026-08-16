@@ -9,10 +9,16 @@ balancieren – vorbei an den Löchern bis zum pulsierenden Ziel.
 
 1. **My Apps → Create new app +**, Namen vergeben
 2. Inhalt von `sketch/sketch.ino` durch [`sketch.ino`](sketch.ino) ersetzen
-3. **Bibliothek eintragen:** `sketch/sketch.yaml` öffnen und unter dem
-   `default`-Profil folgenden Block ergänzen (Einrückung beachten):
+3. **Bibliotheken eintragen:** Inhalt von `sketch/sketch.yaml` komplett durch
+   die [`sketch.yaml`](sketch.yaml) aus diesem Ordner ersetzen. Sie enthält die
+   Plattform `arduino:zephyr` plus die Bibliothek `Arduino_Modulino` mitsamt
+   allen Abhängigkeiten:
 
 ```yaml
+profiles:
+  default:
+    platforms:
+      - platform: arduino:zephyr
     libraries:
       - Arduino_Modulino (0.9.0)
       - STM32duino VL53L4CD (1.0.5)
@@ -22,6 +28,7 @@ balancieren – vorbei an den Löchern bis zum pulsierenden Ziel.
       - Arduino_HS300x (1.0.0)
       - ArduinoGraphics (1.1.5)
       - Arduino_LTR381RGB (1.0.0)
+default_profile: default
 ```
 
 4. **Run** klicken
