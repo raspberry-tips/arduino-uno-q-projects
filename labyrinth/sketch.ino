@@ -16,10 +16,10 @@
  *
  * Verwendung in Arduino App Lab:
  *   My Apps -> "Create new app +" -> Inhalt von sketch/sketch.ino ersetzen.
- *   WICHTIG: Die Bibliothek Arduino_Modulino muss ins Build-Profil der App -
- *   dazu in sketch/sketch.yaml unter dem default-Profil den libraries-Block
- *   aus der README dieses Ordners ergaenzen (oder ueber die Sketch
- *   Libraries der App hinzufuegen). Dann Run.
+ *   WICHTIG: Die Bibliothek Arduino_Modulino ueber den Button
+ *   "Add Sketch Library" (Seitenleiste links) hinzufuegen - die
+ *   sketch.yaml laesst sich in App Lab nicht direkt bearbeiten.
+ *   Dann Run.
  *
  * Kalibrierung: Rollt die Kugel in die falsche Richtung, unten bei
  * INVERT_X / INVERT_Y / SWAP_AXES die Werte anpassen.
