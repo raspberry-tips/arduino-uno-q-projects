@@ -9,27 +9,13 @@ balancieren – vorbei an den Löchern bis zum pulsierenden Ziel.
 
 1. **My Apps → Create new app +**, Namen vergeben
 2. Inhalt von `sketch/sketch.ino` durch [`sketch.ino`](sketch.ino) ersetzen
-3. **Bibliotheken eintragen:** Inhalt von `sketch/sketch.yaml` komplett durch
-   die [`sketch.yaml`](sketch.yaml) aus diesem Ordner ersetzen. Sie enthält die
-   Plattform `arduino:zephyr` plus die Bibliothek `Arduino_Modulino` mitsamt
-   allen Abhängigkeiten:
-
-```yaml
-profiles:
-  default:
-    platforms:
-      - platform: arduino:zephyr
-    libraries:
-      - Arduino_Modulino (0.9.0)
-      - STM32duino VL53L4CD (1.0.5)
-      - STM32duino VL53L4ED (1.0.1)
-      - Arduino_LSM6DSOX (1.1.2)
-      - Arduino_LPS22HB (1.0.2)
-      - Arduino_HS300x (1.0.0)
-      - ArduinoGraphics (1.1.5)
-      - Arduino_LTR381RGB (1.0.0)
-default_profile: default
-```
+3. **Bibliothek hinzufügen:** In der linken Seitenleiste auf das
+   Bibliotheks-Symbol (**Add Sketch Library**) klicken, nach `Arduino_Modulino`
+   suchen und hinzufügen. Die `sketch.yaml` der App lässt sich in App Lab
+   (Stand 0.10.0) nicht direkt bearbeiten – App Lab trägt die Bibliothek über
+   den Button selbst ins Build-Profil ein. Zur Kontrolle: Die
+   [`sketch.yaml`](sketch.yaml) in diesem Ordner zeigt, wie das Profil danach
+   aussehen sollte.
 
 4. **Run** klicken
 
