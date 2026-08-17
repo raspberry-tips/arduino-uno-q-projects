@@ -3,6 +3,8 @@
 Board neigen und die Kugel durch drei Level auf der 8×13-LED-Matrix
 balancieren – vorbei an den Löchern bis zum pulsierenden Ziel.
 
+**Artikel mit allen Details:** [Kugellabyrinth auf dem Arduino UNO Q](https://raspberry.tips/arduino/arduino-uno-q-projekt-kugellabyrinth)
+
 **Hardware:** Arduino UNO Q + [Modulino Movement](https://store.arduino.cc/products/modulino-movement) am Qwiic-Port.
 
 ## Einrichtung in Arduino App Lab
