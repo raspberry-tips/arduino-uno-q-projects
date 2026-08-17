@@ -8,7 +8,7 @@ auf [raspberry.tips](https://raspberry.tips).
 | Projekt | Beschreibung | Artikel |
 |---|---|---|
 | [`laufschrift/`](laufschrift/) | Beliebiger Text als Laufschrift auf der 8×13-LED-Matrix – mit eigenem Pixelfont (a–z, 0–9, Satzzeichen) | [Arduino-Serie](https://raspberry.tips/category/arduino) |
-| [`labyrinth/`](labyrinth/) | Kugellabyrinth: Board neigen und die Kugel per Modulino Movement (IMU am Qwiic-Port) durch 3 Level balancieren | [Arduino-Serie](https://raspberry.tips/category/arduino) |
+| [`labyrinth/`](labyrinth/) | Kugellabyrinth: Board neigen und die Kugel per Modulino Movement (IMU am Qwiic-Port) durch 3 Level balancieren | [Zum Artikel](https://raspberry.tips/arduino/arduino-uno-q-projekt-kugellabyrinth) |
 
 ## Verwendung (Arduino App Lab)
 
