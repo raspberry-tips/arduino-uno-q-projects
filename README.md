@@ -16,9 +16,9 @@ auf [raspberry.tips](https://raspberry.tips).
 2. Inhalt von `sketch/sketch.ino` durch den jeweiligen Sketch ersetzen
 3. **Run** klicken
 
-Für das Labyrinth wird zusätzlich die Bibliothek **Modulino** benötigt
-(über die Sketch Libraries der App hinzufügen) sowie ein
-**Modulino Movement** am Qwiic-Port.
+Für das Labyrinth wird zusätzlich die Bibliothek **Arduino_Modulino**
+benötigt (über den Button „Add Sketch Library“ in der Seitenleiste
+hinzufügen) sowie ein **Modulino Movement** am Qwiic-Port.
 
 ## Lizenz
 
