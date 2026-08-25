@@ -255,9 +255,12 @@ module tape_mount() {
             hull()
                 for (x = [6, tm_w - 6], y = [6, tm_l - 6])
                     translate([x, y, 0]) cylinder(d = 12, h = tm_t);
-            // Schacht-Block am Platten-Ende (y-min-Seite)
-            translate([tm_w/2 - sock_w/2 - 5, 4, 0])
-                cube([sock_w + 10, sock_d + 10, 48]);
+            // Schacht-Block am Platten-Ende (y-min-Seite) — vertikale
+            // Kanten mit demselben r6 gerundet wie die Platte
+            hull()
+                for (x = [tm_w/2 - sock_w/2 + 1, tm_w/2 + sock_w/2 - 1],
+                     y = [10, sock_d + 8])
+                    translate([x, y, 0]) cylinder(d = 12, h = 48);
         }
         // Mast-Kanal mit Keiltasche vorn (Boden bei z 12, tool-less)
         translate([tm_w/2 - sock_w/2, 9, 12])
