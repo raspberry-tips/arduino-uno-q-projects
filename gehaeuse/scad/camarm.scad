@@ -285,6 +285,17 @@ module mast_keil() {
     translate([0, -2, 44]) cube([20, 8.2, 4]);   // Griffplatte
 }
 
+// ── Teil 11: FF-Adapter (26.08.) — zwei Female-Gabeln Ruecken an
+// Ruecken (parallele Achsen = Ellbogen). Noetig, weil Arme beidseitig
+// male enden und die Kamera ebenfalls male ist. Flach drucken,
+// Support nur in den Fingerluecken (wie bei allen Male-Tabs).
+module ff_adapter() {
+    fb = 8;
+    translate([0, fb/2, 0]) gp_female();
+    translate([0, -fb/2, 0]) rotate([0, 0, 180]) gp_female();
+    translate([-gp_base_w/2, -fb/2, 0]) cube([gp_base_w, fb, gp_female_w()]);
+}
+
 // ── Auswahl ───────────────────────────────────────────────────
 if (part == "cam_back")   cam_back();
 if (part == "cam_front")  cam_front();
@@ -297,6 +308,7 @@ if (part == "thumbnut")   thumbnut();
 if (part == "stand_base") stand_base();
 if (part == "tape_mount") tape_mount();
 if (part == "mast_keil") mast_keil();
+if (part == "ff_adapter") ff_adapter();
 if (part == "stand_mast") stand_mast();
 if (part == "preview") {
     cam_back();
