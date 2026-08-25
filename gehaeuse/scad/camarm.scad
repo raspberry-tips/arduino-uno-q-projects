@@ -42,6 +42,10 @@ box_w  = cam_w + 2*clr + 2*wall;    // 30.6
 box_h  = cam_h + 2*clr + 2*wall;    // 29.5
 back_depth = 6;                     // Innenraum hinter Platine (Flex-Bogen)
 front_t    = 2.4;
+wing       = 6.0;   // 26.08.: seitliche Fluegel BEIDSEITIG (symmetrisch —
+                    // noetig fuer den Spiegel-Flip der Frontblende). Rechts
+                    // sitzt darunter der Tab, unten-mittig bleibt der
+                    // Flex-Schlitz frei (Kabel haengt gerade runter).
 
 p0 = [wall + clr, wall + clr];      // Platinen-Nullpunkt
 
@@ -51,13 +55,12 @@ p0 = [wall + clr, wall + clr];      // Platinen-Nullpunkt
 module cam_back() {
     box_t = wall + back_depth;      // 8.4
     difference() {
-        cube([box_w, box_h, box_t]);
+        translate([-wing, 0, 0]) cube([box_w + 2*wing, box_h, box_t]);
         translate([wall, wall, wall])
             cube([box_w - 2*wall, box_h - 2*wall, back_depth + 1]);
-        // Flex-Schlitz OBEN (26.08. verlegt — unten sitzt jetzt der
-        // Tab; Kabel macht den 180-Grad-Bogen hinter der Platine und
-        // laeuft nach oben raus)
-        translate([box_w/2 - 9, box_h - wall - 0.5, wall + back_depth - 2.6])
+        // Flex-Schlitz UNTEN, mittig (Kabel ~16 breit, haengt gerade
+        // runter — der Tab sitzt daneben im rechten Fluegel)
+        translate([box_w/2 - 9, -0.5, wall + back_depth - 2.6])
             cube([18, wall + 1, 3.1]);
     }
     // 4 Dome: 2 diagonale mit Zentrier-Pin (tool-less), 2 mit M2-Loch
@@ -77,7 +80,7 @@ module cam_back() {
     }
     // Schnapp-Nocken aussen auf beiden x-Waenden (Diamantprofil,
     // rastet in die Fenster der Frontblenden-Schuerze)
-    for (xo = [0, box_w])
+    for (xo = [-wing, box_w + wing])
         translate([xo, box_h/2, 5.75])
             rotate([0, 45, 0]) cube([1.0, 4, 1.0], center = true);
     // Male-Tab unter der Unterkante — 26.08. NEU: Finger stehen
@@ -87,7 +90,7 @@ module cam_back() {
     //    HORIZONTAL → Kamera nickt am Mast aufs Bett (Tilt) statt
     //    nur zu rollen. Knuckle/Finger stehen z 0..16 (Case ist 8.4
     //    tief — der Ueberstand liegt frei unter der Unterkante).
-    translate([box_w/2 - gp_male_w()/2, 0.1, 8])
+    translate([box_w + wing - 0.6, 0.1, 8])
         rotate([0, 0, 180]) rotate([0, 90, 0]) gp_male();
 }
 
@@ -100,15 +103,15 @@ sk_d = 6.0;    // Schuerzentiefe
 sk_c = 0.3;    // Spiel zur Box je Seite
 
 module cam_front() {
-    px0 = -(sk_c + sk_t);              // Plattenrand links
-    pw  = box_w + 2*(sk_c + sk_t);     // Plattenbreite
+    px0 = -wing - (sk_c + sk_t);            // Plattenrand links
+    pw  = box_w + 2*wing + 2*(sk_c + sk_t); // Plattenbreite
     ph  = box_h + sk_c + sk_t;         // Plattenhoehe (y0 buendig)
     difference() {
         union() {
             translate([px0, 0, 0]) cube([pw, ph, front_t]);
             // Schuerze: links, rechts, y-max
             translate([px0, 0, front_t]) cube([sk_t, ph, sk_d]);
-            translate([box_w + sk_c, 0, front_t]) cube([sk_t, ph, sk_d]);
+            translate([box_w + wing + sk_c, 0, front_t]) cube([sk_t, ph, sk_d]);
             translate([px0, box_h + sk_c, front_t]) cube([pw, sk_t, sk_d]);
         }
         // Linsenfenster QUADRATISCH wie Referenz-Case 983982 (Halter
@@ -122,13 +125,9 @@ module cam_front() {
                 cylinder(d = 2.4, h = front_t + 1);
                 cylinder(d = 4.4, h = 1.4);
             }
-        // Durchlass fuer das Flexkabel in der y-max-Schuerze
-        // (Schlitz sitzt mittig — x-symmetrisch, Flip-sicher)
-        translate([box_w/2 - 9, box_h + sk_c - 0.5, front_t - 0.5])
-            cube([18, sk_t + 1, sk_d + 1]);
         // Schnapp-Fenster in beiden x-Schuerzen (Nocke box-z 5.75 →
         // lokal z = front_t + (box_t + 1.1 - 5.75) ≈ 6.15)
-        for (xo = [px0 - 0.5, box_w + sk_c - 0.5])
+        for (xo = [px0 - 0.5, box_w + wing + sk_c - 0.5])
             translate([xo, box_h/2 - 2.5, 4.9])
                 cube([sk_t + 1, 5, 2.5]);
     }
