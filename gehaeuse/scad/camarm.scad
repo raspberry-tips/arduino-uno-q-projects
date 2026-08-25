@@ -6,9 +6,12 @@
 //   Teile: cam_back | cam_front | arm40 | arm80 | twist90 |
 //          foot_clamp | foot_plate | thumbnut | preview
 //
-// Verbindungslogik: Arme enden beidseitig MALE (2 Finger), alle
-// Aufnahmen (Kamera, Fuesse, Adapter) sind FEMALE (3 Finger) —
-// dadurch ist jede Kombination steckbar. M5x30 + Fluegelmutter je Gelenk.
+// Verbindungslogik (26.08. korrigiert): Fuesse/Mast/twist90 sind FEMALE
+// (3 Finger). Die KAMERA ist MALE (Female-Gabel waere 15.8 dick und
+// stuende 7.4 ueber die Rueckschale ueber) und steckt direkt in jede
+// Female-Aufnahme. Arme sind beidseitig male (verbinden zwei Females);
+// Arm-an-Kamera/Arm-an-Arm braucht den ff_adapter. Je Gelenk M5x30 +
+// Mutter + 2x thumbnut (Kopf + Mutter je in einer SW8-Tasche → werkzeuglos).
 //
 // Kamera-Masse OFFIZIELL (RPi Mechanical Drawing RPI-CAM-V2_1):
 //   Platine 25 x 23.862, R2-Ecken, 4x Ø2.2 im Raster 21 x 12.5.
@@ -43,16 +46,18 @@ front_t    = 2.4;
 p0 = [wall + clr, wall + clr];      // Platinen-Nullpunkt
 
 // ── Teil 1: Rueckschale — GoPro-Tab unter der Unterkante ──────
-// Druck: Rueckseite auf dem Bett, Tab liegt flach mit (kein Support).
-// Gelenkachse zeigt nach hinten → Roll; Tilt/Pan kommen aus Arm+Fuss.
+// Druck: Rueckseite auf dem Bett; Tab-Finger stehen senkrecht →
+// komplett support-frei. Gelenkachse horizontal → Tilt am Mast.
 module cam_back() {
     box_t = wall + back_depth;      // 8.4
     difference() {
         cube([box_w, box_h, box_t]);
         translate([wall, wall, wall])
             cube([box_w - 2*wall, box_h - 2*wall, back_depth + 1]);
-        // Flex-Schlitz unten (Kabel ~16 breit)
-        translate([box_w/2 - 9, -0.5, wall + back_depth - 2.6])
+        // Flex-Schlitz OBEN (26.08. verlegt — unten sitzt jetzt der
+        // Tab; Kabel macht den 180-Grad-Bogen hinter der Platine und
+        // laeuft nach oben raus)
+        translate([box_w/2 - 9, box_h - wall - 0.5, wall + back_depth - 2.6])
             cube([18, wall + 1, 3.1]);
     }
     // 4 Dome: 2 diagonale mit Zentrier-Pin (tool-less), 2 mit M2-Loch
@@ -75,8 +80,15 @@ module cam_back() {
     for (xo = [0, box_w])
         translate([xo, box_h/2, 5.75])
             rotate([0, 45, 0]) cube([1.0, 4, 1.0], center = true);
-    // Male-Tab unter der Unterkante, buendig mit Rueckseite (9.4 ≈ box_t+1)
-    translate([box_w/2, 0.1, 0]) rotate([0, 0, 180]) gp_male();
+    // Male-Tab unter der Unterkante — 26.08. NEU: Finger stehen
+    // SENKRECHT (Stapel entlang x statt flach in z). Zwei Fliegen:
+    // 1. Rueckenlage-Druck OHNE Support (vorher schwebte der obere
+    //    Finger 3.4 ueber dem Spalt), 2. Gelenkachse liegt jetzt
+    //    HORIZONTAL → Kamera nickt am Mast aufs Bett (Tilt) statt
+    //    nur zu rollen. Knuckle/Finger stehen z 0..16 (Case ist 8.4
+    //    tief — der Ueberstand liegt frei unter der Unterkante).
+    translate([box_w/2 - gp_male_w()/2, 0.1, 8])
+        rotate([0, 0, 180]) rotate([0, 90, 0]) gp_male();
 }
 
 // ── Teil 2: Frontblende — TOOL-LESS (26.08.): 3-seitige Schuerze
@@ -110,6 +122,10 @@ module cam_front() {
                 cylinder(d = 2.4, h = front_t + 1);
                 cylinder(d = 4.4, h = 1.4);
             }
+        // Durchlass fuer das Flexkabel in der y-max-Schuerze
+        // (Schlitz sitzt mittig — x-symmetrisch, Flip-sicher)
+        translate([box_w/2 - 9, box_h + sk_c - 0.5, front_t - 0.5])
+            cube([18, sk_t + 1, sk_d + 1]);
         // Schnapp-Fenster in beiden x-Schuerzen (Nocke box-z 5.75 →
         // lokal z = front_t + (box_t + 1.1 - 5.75) ≈ 6.15)
         for (xo = [px0 - 0.5, box_w + sk_c - 0.5])
