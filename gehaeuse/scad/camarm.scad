@@ -118,13 +118,11 @@ module cam_front() {
         // ist ~8x8 eckig — ein rundes Fenster klemmt an den Ecken)
         translate([p0[0] + lens_x - lens_win/2, p0[1] + lens_y - lens_win/2, -0.5])
             cube([lens_win, lens_win, front_t + 1]);
-        // 4 Loecher: 2 nehmen die Zentrier-Pins auf, 2 = M2-Reserve;
-        // Senkung auf der AUSSENSEITE (z0 = Sichtseite nach Montage-Flip)
+        // 4 Loecher: 2 nehmen die Zentrier-Pins auf, 2 = M2-Reserve
+        // (ohne Senkung — tool-less, 26.08.)
         for (hx = hole_x, hy = hole_y)
-            translate([p0[0] + hx, p0[1] + hy, -0.5]) {
+            translate([p0[0] + hx, p0[1] + hy, -0.5])
                 cylinder(d = 2.4, h = front_t + 1);
-                cylinder(d = 4.4, h = 1.4);
-            }
         // Schnapp-Fenster in beiden x-Schuerzen (Nocke box-z 5.75 →
         // lokal z = front_t + (box_t + 1.1 - 5.75) ≈ 6.15)
         for (xo = [px0 - 0.5, box_w + wing + sk_c - 0.5])
