@@ -34,8 +34,9 @@ lens_x     = 12.5;   // 26.08.: aus Referenz-Case Printables 983982 vermessen �
 lens_y     = 8.75;    // horizontal zentriert, nahe der Flex-Kante (Fenster dort
 lens_win   = 9.4;     // 9x9 Quadrat, Mitte Platte-x/y 13.97/10.8 → PCB 12.5/8.75)
 
-wall   = 2.4;
-clr    = 0.4;
+wall    = 2.4;
+clr     = 0.4;
+board_t = 1.1;   // Platinendicke — geht in Klemm-/Fensterrechnung ein
 post_d = 5.0;
 post_hole = 1.8;                // M2 selbstschneidend
 box_w  = cam_w + 2*clr + 2*wall;    // 30.6
@@ -63,21 +64,13 @@ module cam_back() {
         translate([box_w/2 - 9, -0.5, wall + back_depth - 2.6])
             cube([18, wall + 1, 3.1]);
     }
-    // 4 Dome: 2 diagonale mit Zentrier-Pin (tool-less), 2 mit M2-Loch
-    // als optionale Schraub-Reserve (26.08.)
-    for (hx = hole_x, hy = hole_y) {
-        pin = (hx == hole_x[0] && hy == hole_y[0]) || (hx == hole_x[1] && hy == hole_y[1]);
-        translate([p0[0] + hx, p0[1] + hy, 0])
-            if (pin) {
-                cylinder(d = post_d, h = box_t);
-                translate([0, 0, box_t]) cylinder(d = 1.7, h = 2.0);
-            } else {
-                difference() {
-                    cylinder(d = post_d, h = box_t);
-                    translate([0, 0, wall]) cylinder(d = post_hole, h = back_depth + 1);
-                }
-            }
-    }
+    // 4 Dome, ALLE mit Zentrier-Pin (26.08.: Board an allen vier
+    // Ecken gefuehrt, M2-Reserve entfaellt — tool-less pur)
+    for (hx = hole_x, hy = hole_y)
+        translate([p0[0] + hx, p0[1] + hy, 0]) {
+            cylinder(d = post_d, h = box_t);
+            translate([0, 0, box_t]) cylinder(d = 1.7, h = 2.0);
+        }
     // Schnapp-Nocken aussen auf beiden x-Waenden (Diamantprofil,
     // rastet in die Fenster der Frontblenden-Schuerze)
     for (xo = [-wing, box_w + wing])
@@ -118,15 +111,31 @@ module cam_front() {
         // ist ~8x8 eckig — ein rundes Fenster klemmt an den Ecken)
         translate([p0[0] + lens_x - lens_win/2, p0[1] + lens_y - lens_win/2, -0.5])
             cube([lens_win, lens_win, front_t + 1]);
-        // 4 Loecher: 2 nehmen die Zentrier-Pins auf, 2 = M2-Reserve
-        // (ohne Senkung — tool-less, 26.08.)
+        // 4 glatte Pin-Loecher (ohne Senkung — tool-less, 26.08.)
         for (hx = hole_x, hy = hole_y)
             translate([p0[0] + hx, p0[1] + hy, -0.5])
                 cylinder(d = 2.4, h = front_t + 1);
-        // Schnapp-Fenster in beiden x-Schuerzen (Nocke box-z 5.75 →
-        // lokal z = front_t + (box_t + 1.1 - 5.75) ≈ 6.15)
+        // Flaechen-Relief 0.6 ueber der ganzen Platine (Kleinbauteile
+        // auf der Front!) — Kontakt nur an 4 Ringzonen um die Loecher.
+        // Referenz 983982 macht es genauso (Rahmen + 0.64-Relief).
+        difference() {
+            translate([p0[0] - 0.2, p0[1] - 0.2, front_t - 0.6])
+                cube([cam_w + 0.4, cam_h + 0.4, 0.7]);
+            for (hx = hole_x, hy = hole_y)
+                translate([p0[0] + hx, p0[1] + hy, front_t - 0.7])
+                    cylinder(d = 6.5, h = 0.9);
+        }
+        // Sensor-Stecker-Tasche UEBER dem Fenster (aus Referenz 983982
+        // vermessen: 8.9 x 8.9, PCB x 8.05..16.95 / y 13.19..22.08;
+        // dort 1.27 Freiraum → hier 1.4 tief, +0.75 Toleranz je Seite)
+        translate([p0[0] + 7.3, p0[1] + 12.4, front_t - 1.4])
+            cube([10.4, 10.4, 1.5]);
+        // Schnapp-Fenster in beiden x-Schuerzen — KLEMMT das Board:
+        // Innenflaeche liegt bei box_t + board_t (9.5); die platten-
+        // seitige Fensterkante (lokal 11.9 - kante) fasst die Nocken-
+        // Oberkante 5.75+0.7 mit 0.1 Vorspannung → 11.9-6.35 = 5.55
         for (xo = [px0 - 0.5, box_w + wing + sk_c - 0.5])
-            translate([xo, box_h/2 - 2.5, 4.9])
+            translate([xo, box_h/2 - 2.5, 5.55])
                 cube([sk_t + 1, 5, 2.5]);
     }
 }
