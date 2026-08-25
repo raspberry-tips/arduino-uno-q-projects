@@ -29,7 +29,7 @@ hole_x     = [2, 23];
 hole_y     = [9.362, 21.862];   // V2
 lens_x     = 12.5;   // 26.08.: aus Referenz-Case Printables 983982 vermessen —
 lens_y     = 8.75;    // horizontal zentriert, nahe der Flex-Kante (Fenster dort
-lens_win_d = 11;      // 9x9 Quadrat, Mitte Platte-x/y 13.97/10.8 → PCB 12.5/8.75)
+lens_win   = 9.4;     // 9x9 Quadrat, Mitte Platte-x/y 13.97/10.8 → PCB 12.5/8.75)
 
 wall   = 2.4;
 clr    = 0.4;
@@ -99,14 +99,16 @@ module cam_front() {
             translate([box_w + sk_c, 0, front_t]) cube([sk_t, ph, sk_d]);
             translate([px0, box_h + sk_c, front_t]) cube([pw, sk_t, sk_d]);
         }
-        // Linsenfenster
-        translate([p0[0] + lens_x, p0[1] + lens_y, -0.5])
-            cylinder(d = lens_win_d, h = front_t + 1);
-        // 4 Loecher: 2 nehmen die Zentrier-Pins auf, 2 = M2-Reserve
+        // Linsenfenster QUADRATISCH wie Referenz-Case 983982 (Halter
+        // ist ~8x8 eckig — ein rundes Fenster klemmt an den Ecken)
+        translate([p0[0] + lens_x - lens_win/2, p0[1] + lens_y - lens_win/2, -0.5])
+            cube([lens_win, lens_win, front_t + 1]);
+        // 4 Loecher: 2 nehmen die Zentrier-Pins auf, 2 = M2-Reserve;
+        // Senkung auf der AUSSENSEITE (z0 = Sichtseite nach Montage-Flip)
         for (hx = hole_x, hy = hole_y)
             translate([p0[0] + hx, p0[1] + hy, -0.5]) {
                 cylinder(d = 2.4, h = front_t + 1);
-                translate([0, 0, front_t - 0.9]) cylinder(d = 4.4, h = 1.4);
+                cylinder(d = 4.4, h = 1.4);
             }
         // Schnapp-Fenster in beiden x-Schuerzen (Nocke box-z 5.75 →
         // lokal z = front_t + (box_t + 1.1 - 5.75) ≈ 6.15)
@@ -114,13 +116,6 @@ module cam_front() {
             translate([xo, box_h/2 - 2.5, 4.9])
                 cube([sk_t + 1, 5, 2.5]);
     }
-    // Streulicht-Kragen
-    translate([p0[0] + lens_x, p0[1] + lens_y, front_t])
-        difference() {
-            cylinder(d = lens_win_d + 4, h = 5);
-            translate([0, 0, -0.5])
-                cylinder(d1 = lens_win_d, d2 = lens_win_d + 4, h = 6);
-        }
 }
 
 // ── Teil 3: Arme — beidseitig male, flach druckbar ────────────
