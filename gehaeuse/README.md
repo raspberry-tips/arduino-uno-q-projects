@@ -13,7 +13,7 @@ https://raspberry.tips/3d-druck/arduino-uno-q-gehaeuse-3d-druck
 |---|---|
 | `boden.stl` / `haube.stl` | druckfertig orientiert, support-frei |
 | `boden.3mf` / `haube.3mf` | ELEGOO-Slicer-Projekte mit erprobten Einstellungen |
-| `stack_case.scad` + `lib_gopro.scad` | parametrische OpenSCAD-Quellen |
+| `scad/` | alle parametrischen OpenSCAD-Quellen: `stack_case.scad` (Gehäuse), `camarm.scad` (Kamera-Halterungssystem, komplett werkzeuglos), `lib_gopro.scad` (GoPro-Gelenk-Module) |
 | `haube_overlay.png` | Foto-Overlay-Verifikation der Öffnungen |
 
 ## Druck
