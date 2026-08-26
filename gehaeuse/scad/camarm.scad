@@ -86,8 +86,11 @@ module cam_back() {
     //    HORIZONTAL → Kamera nickt am Mast aufs Bett (Tilt) statt
     //    nur zu rollen. Knuckle/Finger stehen z 0..16 (Case ist 8.4
     //    tief — der Ueberstand liegt frei unter der Unterkante).
-    translate([box_w + wing - 0.6, 0.1, 8])
-        rotate([0, 0, 180]) rotate([0, 90, 0]) gp_male();
+    // 26.08.: nur noch EIN Finger, dafuer 4.0 dick (statt 2x 3.0) —
+    // gleiche Staerke wie die Finne der Gehaeuse-Klammer. Verbindung
+    // ist Flaechen-Reibschluss (M5 + thumbnut), z. B. an adapter45.
+    translate([box_w + wing - 2.6, 0.1, 8])
+        rotate([0, 0, 180]) rotate([0, 90, 0]) gp_finger(4.0);
 }
 
 // ── Teil 2: Frontblende — TOOL-LESS (26.08.): 3-seitige Schuerze
