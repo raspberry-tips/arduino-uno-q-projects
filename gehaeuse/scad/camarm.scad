@@ -328,6 +328,28 @@ module ff_adapter() {
     translate([-gp_base_w/2, -fb/2, 0]) cube([gp_base_w, fb, gp_female_w()]);
 }
 
+// ── Teil 12: 45-Grad-Adapter (26.08.) — zwei Ø16-Gelenkscheiben,
+// Achsen 45 Grad zueinander, verschmolzen. Jede Scheibe = Reibschluss-
+// Gelenk (M5 + 2 thumbnut): eine flach an die Gehaeuse-Klammer-Finne,
+// eine ans Kamera-Auge. Druckt flach liegend OHNE Support (die geneigte
+// Scheibe waechst mit 45 Grad aus dem verschmolzenen Koerper).
+module adapter45() {
+    difference() {
+        union() {
+            cylinder(d = 16, h = 6);
+            translate([0, 12, 7]) rotate([45, 0, 0]) cylinder(d = 16, h = 6);
+        }
+        translate([0, 0, -1]) cylinder(d = 5.4, h = 30);
+        translate([0, 12, 7]) rotate([45, 0, 0])
+            translate([0, 0, -15]) cylinder(d = 5.4, h = 40);
+        // Versenkte M5-Mutterntaschen (SW8 + 0.6 Spiel) — Mutter ist
+        // gefangen, Fluegelmutter kommt nur auf die Gegenseite
+        translate([0, 0, 2.5]) cylinder(d = 8.6 / cos(30), h = 3.6, $fn = 6);
+        translate([0, 12, 7]) rotate([45, 0, 0])
+            translate([0, 0, -0.01]) cylinder(d = 8.6 / cos(30), h = 3.5, $fn = 6);
+    }
+}
+
 // ── Auswahl ───────────────────────────────────────────────────
 if (part == "cam_back")   cam_back();
 if (part == "cam_front")  cam_front();
@@ -341,6 +363,7 @@ if (part == "stand_base") stand_base();
 if (part == "tape_mount") tape_mount();
 if (part == "mast_keil") mast_keil();
 if (part == "ff_adapter") ff_adapter();
+if (part == "adapter45") adapter45();
 if (part == "stand_mast") stand_mast();
 if (part == "preview") {
     cam_back();
