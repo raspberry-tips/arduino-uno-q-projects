@@ -128,8 +128,9 @@ module cam_front() {
         // Sensor-Stecker-Tasche UEBER dem Fenster (aus Referenz 983982
         // vermessen: 8.9 x 8.9, PCB x 8.05..16.95 / y 13.19..22.08;
         // dort 1.27 Freiraum → hier 1.4 tief, +0.75 Toleranz je Seite)
+        // 26.08.: rechts (+x, Blick von hinten aufs Modell) +2 breiter
         translate([p0[0] + 7.3, p0[1] + 12.4, front_t - 1.4])
-            cube([10.4, 10.4, 1.5]);
+            cube([12.4, 10.4, 1.5]);
         // Schnapp-Fenster in beiden x-Schuerzen — KLEMMT das Board:
         // Innenflaeche liegt bei box_t + board_t (9.5); die platten-
         // seitige Fensterkante (lokal 11.9 - kante) fasst die Nocken-
