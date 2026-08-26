@@ -71,11 +71,14 @@ module cam_back() {
             cylinder(d = post_d, h = box_t);
             translate([0, 0, box_t]) cylinder(d = 1.7, h = 2.0);
         }
-    // Schnapp-Nocken aussen auf beiden x-Waenden (Diamantprofil,
-    // rastet in die Fenster der Frontblenden-Schuerze)
+    // Schnapp-Nocken aussen (Diamantprofil) — 26.08. Testfit-Fix:
+    // 1.6 statt 1.0 (greift ~0.8 nach Schuerzenspiel statt 0.4);
+    // dritte Nocke mittig an der Oberkante (flip-sicher, da zentriert)
     for (xo = [-wing, box_w + wing])
         translate([xo, box_h/2, 5.75])
-            rotate([0, 45, 0]) cube([1.0, 4, 1.0], center = true);
+            rotate([0, 45, 0]) cube([1.6, 5, 1.6], center = true);
+    translate([box_w/2, box_h, 5.75])
+        rotate([45, 0, 0]) cube([5, 1.6, 1.6], center = true);
     // Male-Tab unter der Unterkante — 26.08. NEU: Finger stehen
     // SENKRECHT (Stapel entlang x statt flach in z). Zwei Fliegen:
     // 1. Rueckenlage-Druck OHNE Support (vorher schwebte der obere
@@ -131,13 +134,16 @@ module cam_front() {
         // 26.08.: rechts (+x, Blick von hinten aufs Modell) +2 breiter
         translate([p0[0] + 7.3, p0[1] + 12.4, front_t - 1.4])
             cube([12.4, 10.4, 1.5]);
-        // Schnapp-Fenster in beiden x-Schuerzen — KLEMMT das Board:
-        // Innenflaeche liegt bei box_t + board_t (9.5); die platten-
-        // seitige Fensterkante (lokal 11.9 - kante) fasst die Nocken-
-        // Oberkante 5.75+0.7 mit 0.1 Vorspannung → 11.9-6.35 = 5.55
+        // Schnapp-Fenster — 26.08. Testfit-Fix: eng ueber der Nocke
+        // (5.4 x 2.35 gegen Nocke 5 x 2.26). Lage: Innenflaeche bei
+        // box_t + board_t (9.5), Fensterkante fasst die Nocken-
+        // Oberkante 5.75+1.13 mit 0.1 Vorspannung → 11.9-6.78 = 5.12
         for (xo = [px0 - 0.5, box_w + wing + sk_c - 0.5])
-            translate([xo, box_h/2 - 2.5, 5.55])
-                cube([sk_t + 1, 5, 2.5]);
+            translate([xo, box_h/2 - 2.7, 5.12])
+                cube([sk_t + 1, 5.4, 2.35]);
+        // Fenster fuer die Oberkanten-Nocke in der y-max-Schuerze
+        translate([box_w/2 - 2.7, box_h + sk_c - 0.5, 5.12])
+            cube([5.4, sk_t + 1, 2.35]);
     }
 }
 
