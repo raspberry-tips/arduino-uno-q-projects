@@ -4,6 +4,8 @@ Werkzeuglose Kamerahalterung fuer eine IMX219-Kamera (Arducam/Pi Cam 2) am
 Arduino UNO Q — Teil der Artikelserie auf https://raspberry.tips (Arduino UNO Q
 Druckwaechter). Klemmt am Druckergehaeuse, nichts wird gebohrt oder geklebt.
 
+> **Es gibt eine neuere Version:** [`../kamera-halterung-v2/`](../kamera-halterung-v2/) — steifer Arm, der an der Z-Saeule klemmt, mit aufsteckbarer Board-Wanne und Pan/Tilt-Adapter. Diese Teile hier bleiben unveraendert, weil die Artikel darauf verweisen.
+
 | Datei | Teil | Druck-Hinweis |
 |---|---|---|
 | `klammer_gehaeuse_uno.stl` | Klammer mit UNO-Q-Halter (Schenkelabstand 42,5 mm — an die eigene Gehaeusekante anpassen) | auf die Seite legen (Taste F im Slicer), 4-6 Wandlinien |
