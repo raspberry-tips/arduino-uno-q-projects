@@ -42,5 +42,5 @@ DEBUG_SAVE_LAST = True          # jedes Modell-Bild nach /tmp/spaghetti_debug.jp
 
 COLLECT_TRAINING_FRAMES = True  # Rotierender Trainings-Puffer: jedes Bild
 TRAINING_FRAME_DIR = "/app/data/training"   # unterhalb der Schwelle wird
-TRAINING_FRAME_MAX = 1000       # gesichert, die aeltesten fliegen raus.
+TRAINING_FRAME_MAX = 2500       # gesichert, die aeltesten fliegen raus.
                                 # Bei Bedarf (Re-Training) einfach abziehen.
