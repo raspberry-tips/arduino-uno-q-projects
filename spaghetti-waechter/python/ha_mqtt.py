@@ -27,7 +27,7 @@ class HaMqtt:
         self.avail_t = f"{self.base}/availability"
         self.connected = False
         if not _PAHO:
-            self.log.warning("paho-mqtt fehlt — HA-Anbindung deaktiviert (VERIFY-1).")
+            self.log.warning("paho-mqtt missing - Home Assistant link disabled.")
             self.client = None
             return
         self.client = mqtt.Client(client_id=dev_id)
@@ -46,7 +46,7 @@ class HaMqtt:
             self.client.connect_async(host, port, keepalive=60)
             self.client.loop_start()
         except Exception as e:
-            self.log.warning(f"MQTT-Verbindung fehlgeschlagen: {e}")
+            self.log.warning(f"MQTT connection failed: {e}")
             self.client = None
 
     # ── Discovery ─────────────────────────────────────────────
@@ -76,7 +76,7 @@ class HaMqtt:
             "topic": f"{self.base}/alarm_image",
         })
         self.client.publish(self.avail_t, "online", retain=True)
-        self.log.info("MQTT verbunden, Discovery veroeffentlicht.")
+        self.log.info("MQTT connected, discovery published.")
 
     def _announce(self, component, key, extra):
         cfg = {
