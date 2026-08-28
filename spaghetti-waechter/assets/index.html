@@ -46,7 +46,7 @@
 </header>
 <main>
   <section><h2>Current camera view</h2><img id="frame" alt="current camera view"></section>
-  <section><h2>Last alarm (marked regions)</h2><img id="alarmimg" alt="no alarm yet"></section>
+  <section><h2>Last alarm (marked regions)</h2><img id="alarmimg" alt="" style="display:none"><p id="noalarm" style="color:#888">No alarm so far — fingers crossed. 🤞</p></section>
 </main>
 <details>
   <summary>⚙️ Settings</summary>
@@ -99,7 +99,12 @@ async function refresh() {
     document.getElementById("printer").textContent = s.printer ? "Printer: " + s.printer : "";
     document.getElementById("log").textContent = s.log.join("\n") || "(no events yet)";
     if (s.frame_b64) document.getElementById("frame").src = "data:image/jpeg;base64," + s.frame_b64;
-    if (s.alarm_b64) document.getElementById("alarmimg").src = "data:image/jpeg;base64," + s.alarm_b64;
+    if (s.alarm_b64) {
+      const ai = document.getElementById("alarmimg");
+      ai.src = "data:image/jpeg;base64," + s.alarm_b64;
+      ai.style.display = "";
+      document.getElementById("noalarm").style.display = "none";
+    }
   } catch (e) { document.getElementById("status").textContent = "offline"; }
 }
 refresh();
