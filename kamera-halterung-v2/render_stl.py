@@ -86,7 +86,8 @@ wanne = trimesh.load(os.path.join(STL, "uno-q-wanne.stl"))
 adapter = trimesh.load(os.path.join(STL, "kamera-adapter.stl"))
 
 render([(arm, ORANGE)], "halterung-arm.png", elev=30, azim=-62, figsize=(11, 6))
-render([(wanne, GRAU)], "uno-q-wanne.png", elev=36, azim=-52, figsize=(9, 8))
+# Blick von der Zungen-Seite, sonst verdecken die Waende die zwei Haltezapfen
+render([(wanne, GRAU)], "uno-q-wanne.png", elev=34, azim=118, figsize=(9, 8))
 render([(adapter, BLAU)], "kamera-adapter.png", elev=26, azim=-58, figsize=(9, 7))
 
 # Uebersicht: alle drei so angeordnet, wie sie auf der Druckplatte liegen
@@ -107,10 +108,14 @@ def stelle(mesh, grad, translation):
     return m
 
 
-# Wanne: +90 dreht die Noppen (lokal x 59/71, y 70..77, Achse +Y, z 5,8) in die
-# Arm-Loecher (x 84/96, y 29,5, Achse Z). Der Boden landet dabei auf y 35,3 =
-# Balken-Unterseite, die Zunge liegt buendig darunter.
-wanne_m = stelle(wanne, 90, [25.0, 35.3, -70.0])
+# Wanne: +90 dreht die Noppen (lokal x 59/71, Achse +Y, z 5,8) in die Arm-Loecher
+# (x 84/96, y 29,5, Achse Z). Der Boden landet dabei auf y 35,3 = Balken-
+# Unterseite, die Zunge liegt buendig darunter.
+# Die Aussenbreite AB kommt aus dem Mesh (Noppenspitze minus Noppenlaenge) —
+# so stimmt die Montage auch, wenn WB_ im Modell geaendert wird.
+noppen = wanne.vertices[wanne.vertices[:, 0] > 50.0]
+AB = noppen[:, 1].max() - 7.0
+wanne_m = stelle(wanne, 90, [25.0, 35.3, -AB])
 # Adapter: Plattenloch (lokal 8|12) auf die Gewindeachse im Balken (x 12, z 12)
 adapter_m = stelle(adapter, -90, [4.0, 43.3, 24.0])
 
