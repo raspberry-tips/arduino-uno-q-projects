@@ -14,7 +14,7 @@ horizontal und vertikal ausrichten lässt.
 
 | Datei | Teil | Maße | Druck-Hinweis |
 |---|---|---|---|
-| `stl/halterung-arm.stl` | Klemmarm mit Maul (27,3 mm Weite, 31,4 mm tief) | 160 × 43,3 × 24 mm | flach aufs Bett (Profil unten), **kein Support**, 4–5 Wandlinien |
+| `stl/halterung-arm.stl` | Klemmarm: Maul 27,3 × 31,4 mm, dazu zwei Ø-3,3-Schraubkanäle (28 mm tief) in den Backen | 160 × 43,3 × 24 mm | flach aufs Bett (Profil unten), **kein Support**, 4–5 Wandlinien |
 | `stl/uno-q-wanne.stl` | Wanne fürs Board, wird seitlich aufgesteckt | 85 × 94 × 16,5 mm | Boden aufs Bett, **Support nötig** — die zwei Haltezapfen ragen waagerecht ab |
 | `stl/kamera-adapter.stl` | Pan/Tilt-Adapter für das Kameragehäuse | 36 × 24 × 25,5 mm | Platte aufs Bett, kein Support |
 
@@ -34,10 +34,11 @@ der real montiert ist.
 ![Montage](renderings/montage-seite.png)
 
 1. Arm mit dem Maul (27,3 mm Weite) auf die Z-Strebe schieben und mit **zwei
-   Schrauben** sichern. Im Testaufbau waren das schlichte Holzschrauben, die
-   sich ihr Gewinde im PLA selbst schneiden — das hält, ist aber nur begrenzt
-   oft lösbar. Wer welche zur Hand hat, nimmt besser **M3-Gewindeeinsätze**
-   zum Einschmelzen.
+   Schrauben** sichern — sie kommen von der Stirnseite in die beiden
+   Ø-3,3-Kanäle, je einer in der oberen und der unteren Klemmbacke. Im
+   Testaufbau waren das schlichte Holzschrauben, die sich ihr Gewinde im PLA
+   selbst schneiden: hält gut, ist aber nur begrenzt oft lösbar. Wer welche
+   zur Hand hat, nimmt besser **M3-Gewindeeinsätze** zum Einschmelzen.
 2. Wanne von der Seite auf die zwei Zapfen-Löcher (Ø 4,3 mm) stecken — die
    Zunge legt sich dabei bündig unter den Balken und stützt die Wanne.
 3. Kamera-Adapter oben auf den Balken setzen und von oben verschrauben.
