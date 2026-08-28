@@ -33,22 +33,28 @@ der real montiert ist.
 
 ![Montage](renderings/montage-seite.png)
 
-1. Arm mit dem Maul auf die Z-Säule schieben.
+1. Arm mit dem Maul (27,3 mm Weite) auf die Z-Strebe schieben und mit **zwei
+   Schrauben** sichern. Im Testaufbau waren das schlichte Holzschrauben, die
+   sich ihr Gewinde im PLA selbst schneiden — das hält, ist aber nur begrenzt
+   oft lösbar. Wer welche zur Hand hat, nimmt besser **M3-Gewindeeinsätze**
+   zum Einschmelzen.
 2. Wanne von der Seite auf die zwei Zapfen-Löcher (Ø 4,3 mm) stecken — die
    Zunge legt sich dabei bündig unter den Balken und stützt die Wanne.
 3. Kamera-Adapter oben auf den Balken setzen und von oben verschrauben.
-   **Beide Löcher sind Ø 6,6 mm Durchgang, kein Gewinde** — gehalten wird mit
-   einer Mutter, die von unten in die Senkung Ø 14,5 × 4 mm an der
-   Balken-Unterseite kommt und dort verdrehsicher sitzt (Sechskant bis
-   SW 12,5 mm). Klemmpaket: 5 mm Adapterplatte + 4 mm Restbalken = 9 mm.
+   **Beide Löcher sind Ø 6,6 mm Durchgang, kein Gewinde** — es braucht also
+   eine ganz normale Schraube (M6 oder 1/4 Zoll passen beide) **mit Mutter**;
+   die kommt von unten in die Senkung Ø 14,5 × 4 mm an der Balken-Unterseite
+   und sitzt dort verdrehsicher (Sechskant bis SW 12,5 mm). Klemmpaket:
+   5 mm Adapterplatte + 4 mm Restbalken = 9 mm.
    Lösen, drehen, wieder anziehen = Schwenk (Pan).
 4. Kameragehäuse mit **M5-Schraube + Mutter** in die Gabel des Adapters —
    das ist die Neigung (Tilt). Beides Reibschluss, kein Rastwerk.
 
-Kaufteile: 1 × 1/4"-20-Schraube ca. 16 mm **plus passende Mutter** (9 mm
-Klemmpaket + Mutterhöhe), 1 × M5 × 25 mit Mutter. Kameragehäuse
-(`cam_back.stl` / `cam_front.stl`) liegt unverändert in
-[`../kamera-halterung/`](../kamera-halterung/).
+Kaufteile: 2 × Holzschraube ca. 3,5 mm (oder 2 × M3-Gewindeeinsatz + Schraube)
+für die Z-Strebe, 1 × M6 bzw. 1/4" um 16 mm mit Mutter, 1 × M5 × 25 mit
+Mutter. Alles gewöhnliche Metallschrauben — im Modell steckt bewusst kein
+gedrucktes Gewinde. Kameragehäuse (`cam_back.stl` / `cam_front.stl`) liegt
+unverändert in [`../kamera-halterung/`](../kamera-halterung/).
 
 ## Quellen bearbeiten
 
