@@ -31,16 +31,37 @@ spaghetti-waechter/
   Pause = sauberes Parken, nie M112
 - Alarm latcht bis Druckende; Alarm-Frames (roh + markiert) landen in `data/alarme/`
 
+## Sofort startklar
+
+Das Zip (`spaghetti-waechter.zip`) ist so vorbereitet, dass die App **direkt nach
+dem Import läuft** — ohne dass ihr vorher irgendetwas trainieren müsst:
+
+- In der `app.yaml` steht als Modell der Platzhalter `concrete-crack-anomaly-detection`.
+  Der ist auf jedem UNO Q vorhanden. Ohne ein registriertes Modell würde App Lab
+  die App gar nicht erst starten (`Model … Not Found`).
+- `SCORE_THRESHOLD` steht auf **100** — Beobachtermodus. Es wird nie Alarm
+  ausgelöst, aber ihr seht Livebild, Werte und Log, und der Trainings-Puffer
+  sammelt bereits die Bilder für euer eigenes Modell.
+
+⚠️ Die Werte des Platzhalter-Modells sind **fachlich bedeutungslos** — es kennt
+Risse in Beton, nicht euer Druckbett. Es dient nur dazu, dass die App startet und
+sammeln kann. Für die echte Erkennung braucht ihr euer eigenes Modell, weil
+FOMO-AD immer die konkrete Szene lernt.
+
 ## Inbetriebnahme (Kurzfassung)
 
-1. FOMO-AD-Modell in Edge Impulse trainieren (Teil 3 der Serie),
-   Deployment „Linux aarch64" → `.eim`
-2. Modell registrieren: `.eim` nach `~/.arduino-bricks/ei-models/` (chmod +x)
-   + `model.yaml` unter `~/.arduino-bricks/models/custom-ei/spaghetti-fomo-ad-v1/`
-   (Format: siehe Teil 4 der Serie); Check: `arduino-app-cli model list`
-3. Kamera-Dienste aus Teil 2 stilllegen: `sudo systemctl disable --now liveview capture`
-4. App-Ordner nach `~/ArduinoApps/` kopieren, in App Lab öffnen, **Run**
+1. Kamera-Dienste aus Teil 2 stilllegen: `sudo systemctl disable --now liveview capture`
+   (die Kamera kann immer nur ein Prozess benutzen)
+2. Zip in App Lab über **Import App** einspielen, dann **Run**
    (Erststart zieht Docker-Images, dauert ein paar Minuten)
+3. Ein paar Drucke lang sammeln lassen — die Bilder landen in `data/training/`
+4. Eigenes FOMO-AD-Modell in Edge Impulse trainieren (Teil 3 der Serie),
+   Deployment „Linux aarch64" → `.eim`
+5. Modell registrieren: `.eim` nach `~/.arduino-bricks/ei-models/` (chmod +x)
+   + `model.yaml` unter `~/.arduino-bricks/models/custom-ei/<euer-name>/`
+   (Format: siehe Teil 4 der Serie); Check: `arduino-app-cli model list`
+6. In der `app.yaml` den Platzhalter durch euren Modellnamen ersetzen und
+   die Schwelle aus den eigenen Score-Verteilungen bestimmen (Teil 5)
 5. Einstellungen im Browser: `http://<board-ip>:7000` → ⚙️ Settings
    (Schwelle, Moonraker-IP, MQTT-Zugang — MQTT gilt nach App-Neustart)
 
