@@ -1,5 +1,10 @@
 # Kamerahalterung: Spaghetti-Waechter am 3D-Drucker
 
+> 📦 **Der KI-Druckwächter hat ein eigenes Repo:**
+> [raspberry-tips/uno-q-3d-print-watchdog](https://github.com/raspberry-tips/uno-q-3d-print-watchdog) — dort liegen
+> App, CAD, Kamera-Setup und Autostart zusammen, mit englischem README.
+> Dieser Ordner bleibt bestehen, weil die Artikel der Serie darauf verlinken.
+
 Werkzeuglose Kamerahalterung fuer eine IMX219-Kamera (Arducam/Pi Cam 2) am
 Arduino UNO Q — Teil der Artikelserie auf https://raspberry.tips (Arduino UNO Q
 Druckwaechter). Klemmt am Druckergehaeuse, nichts wird gebohrt oder geklebt.
