@@ -1,5 +1,10 @@
 # Spaghetti-Wächter — KI-Druckwächter für den Arduino UNO Q
 
+> 📦 **Der KI-Druckwächter hat ein eigenes Repo:**
+> [raspberry-tips/uno-q-3d-print-watchdog](https://github.com/raspberry-tips/uno-q-3d-print-watchdog) — dort liegen
+> App, CAD, Kamera-Setup und Autostart zusammen, mit englischem README.
+> Dieser Ordner bleibt bestehen, weil die Artikel der Serie darauf verlinken.
+
 App-Lab-App, die 3D-Druck-Fehler ("Spaghetti") per FOMO-AD-Anomalieerkennung
 auf dem Arduino UNO Q erkennt — mit Status-Webseite, Home-Assistant-Anbindung
 (MQTT Discovery inkl. Beweisfoto-Kamera), LED-Matrix-Alarm und optionaler
