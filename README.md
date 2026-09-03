@@ -1,5 +1,11 @@
 # Arduino UNO Q – Projekte von raspberry.tips
 
+> 📦 **Der KI-Druckwächter hat ein eigenes Repo:**
+> [raspberry-tips/uno-q-3d-print-watchdog](https://github.com/raspberry-tips/uno-q-3d-print-watchdog) — dort liegen
+> App, CAD, Kamera-Setup und Autostart zusammen, mit englischem README.
+> Dieser Ordner bleibt bestehen, weil die Artikel der Serie darauf verlinken.
+
+
 Sketches und Projekte aus unserer [Arduino-UNO-Q-Artikelserie](https://raspberry.tips/category/arduino)
 auf [raspberry.tips](https://raspberry.tips).
 
