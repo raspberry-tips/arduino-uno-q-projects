@@ -1,5 +1,47 @@
 # Kamerahalterung v2: Spaghetti-Wächter am 3D-Drucker
 
+> ## English summary
+>
+> Camera mount (v2) for the **Spaghetti Watchdog**, a local AI print-failure
+> detector running on an Arduino UNO Q — see the
+> [article series](https://raspberry.tips/category/arduino) (German).
+>
+> **Why v2:** the first mount clamped to the printer's housing and could be
+> nudged out of alignment. That matters more than it sounds — the anomaly model
+> learns the whole scene, so moving the camera invalidates every training image
+> ever collected. v2 is a stiff arm that clamps onto the printer's **Z column**.
+>
+> **Three printed parts** (`stl/`), all in PLA at 0.2 mm, 4–5 wall lines:
+>
+> | File | Part | Size | Support |
+> |---|---|---|---|
+> | `halterung-arm.stl` | clamp arm, jaw 27.3 × 31.4 mm, two Ø 3.3 mm screw channels | 160 × 43.3 × 24 mm | none |
+> | `uno-q-wanne.stl` | tray for the board, slides onto the arm | 85 × 94 × 16.5 mm | **yes** — only for the two horizontal pins |
+> | `kamera-adapter.stl` | pan/tilt adapter for the camera housing | 36 × 24 × 25.5 mm | none |
+>
+> The two-part camera housing (`cam_back.stl`, `cam_front.stl`) is unchanged
+> from [`../kamera-halterung/`](../kamera-halterung/).
+>
+> **Hardware:** two wood screws (or better, M3 threaded inserts) hold the arm on
+> the Z strut; one M6 or 1/4" screw **with a nut** joins arm and adapter — both
+> holes are Ø 6.6 mm clearance, no printed thread; the nut drops into the
+> Ø 14.5 × 4 mm recess on the underside of the beam. One M5 screw and nut for
+> the tilt joint.
+>
+> **Known fit issue:** in the test print the tray was a touch tight — the board
+> goes in, but without play. To add clearance, open `build_freecad.py`, raise
+> `WL_` (80) and `WB_` (65) by 0.5–1 mm, then re-run `build_freecad.py` and
+> `export_stl.py`. The STLs published here are the state that is actually
+> mounted on the printer.
+>
+> **Parametric source:** `Halterung-v2.FCStd` (FreeCAD 1.1) with a "Parameter"
+> spreadsheet — change a value, the model rebuilds. `build_freecad.py` builds
+> the document from scratch, `export_stl.py` writes `stl/`, `render_stl.py`
+> makes the images in `renderings/`. Both FreeCAD scripts run headless.
+>
+> **Licence:** CC BY 4.0 — raspberry.tips. Detailed build notes below are in
+> German.
+
 Zweite Generation der Halterung für den KI-Druckwächter auf dem Arduino UNO Q
 (Artikelserie auf [raspberry.tips](https://raspberry.tips/category/arduino)).
 Die v1-Klammer saß am Gehäuse und ließ sich zu leicht verschieben — und
