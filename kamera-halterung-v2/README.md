@@ -1,5 +1,11 @@
 # Kamerahalterung v2: Spaghetti-Wächter am 3D-Drucker
 
+> 📦 **Der KI-Druckwächter hat ein eigenes Repo:**
+> [raspberry-tips/uno-q-3d-print-watchdog](https://github.com/raspberry-tips/uno-q-3d-print-watchdog) — dort liegen
+> App, CAD, Kamera-Setup und Autostart zusammen, mit englischem README.
+> Dieser Ordner bleibt bestehen, weil die Artikel der Serie darauf verlinken.
+
+
 > ## English summary
 >
 > Camera mount (v2) for the **Spaghetti Watchdog**, a local AI print-failure
