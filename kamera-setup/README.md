@@ -1,5 +1,10 @@
 # Kamera-Setup: Livebild + Trainingsbild-Sammler (Arduino UNO Q)
 
+> 📦 **Der KI-Druckwächter hat ein eigenes Repo:**
+> [raspberry-tips/uno-q-3d-print-watchdog](https://github.com/raspberry-tips/uno-q-3d-print-watchdog) — dort liegen
+> App, CAD, Kamera-Setup und Autostart zusammen, mit englischem README.
+> Dieser Ordner bleibt bestehen, weil die Artikel der Serie darauf verlinken.
+
 Zwei Helfer fuer den Spaghetti-Waechter (Artikelserie auf https://raspberry.tips):
 
 - `liveview.py` — MJPEG-Livebild im Browser (Port 8080) zum Ausrichten der
